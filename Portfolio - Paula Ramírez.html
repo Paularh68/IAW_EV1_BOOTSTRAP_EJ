@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Paula Ramírez</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #212529; /* Fondo negro para el cuerpo */
+            color: white; /* Color de texto blanco por defecto */
+        }
+
+        .bg-custom {
+            background-color: #5b4e7e; /* Color morado personalizado */
+        }
+
+        .text-custom {
+            color: #b49fec; /* Color de texto morado */
+        }
+
+        .card {
+            background-color: #343a40; /* Fondo gris oscuro para las tarjetas */
+        }
+
+        /* Estilo para la lista de sugerencias */
+        .suggestions {
+            position: absolute;
+            z-index: 1000;
+            width: 250px; /* Ancho igual al campo de búsqueda */
+            max-height: 200px; /* Altura máxima de la lista */
+            overflow-y: auto; /* Desplazamiento vertical */
+            background-color: #343a40; /* Fondo de la lista */
+            border: 1px solid #ced4da; /* Borde para la lista */
+            border-radius: 0.25rem; /* Bordes redondeados */
+            display: none; /* Oculta la lista por defecto */
+        }
+
+        .suggestions div {
+            padding: 8px; /* Relleno interno */
+            color: white; /* Color de texto blanco */
+            cursor: pointer; /* Cambia el cursor al pasar */
+        }
+
+        .suggestions div:hover {
+            background-color: #5b4e7e; /* Color al pasar el mouse */
+        }
+
+        /* Cambia el color del texto en el modal a negro */
+        .modal-body {
+            color: black; /* Color del texto en la ventana modal */
+        }
+
+        .modal-title {
+            color: black; /* Cambiar color del título del modal a negro */
+        }
+    </style>
+</head>
+
+<body>
+
+   <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://github.com/Paularh68/IAW_EV1_BOOTSTRAP_EJ/blob/main/images/RH-logo.png?raw=true" alt="Logo" style="height: 50px;";">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre Mí</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#courses">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contacto</a>
+                </li>
+            </ul>
+            <!-- Campo de búsqueda -->
+            <div class="position-relative">
+                <form class="d-flex ms-3" id="searchForm" onsubmit="return false;">
+                    <input class="form-control me-2" type="search" placeholder="Buscar proyectos..." id="searchInput" onkeyup="filterProjects()">
+                    <button class="btn btn-outline-dark" type="submit" onclick="performSearch()">
+                        <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
+                    </button>
+                </form>
+                <div class="suggestions" id="suggestions-list"></div> <!-- Lista desplegable -->
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Sección de Inicio -->
+    <section id="home" class="bg-custom text-white text-center py-4">
+        <div class="container">
+            <img src="https://github.com/Paularh68/IAW_EV1_BOOTSTRAP_EJ/blob/main/images/perfilx400.png?raw=true" alt="Paula Ramírez" class="rounded-circle img-fluid border border-5 border-white" style="width: 100px; height: 100px;">
+            <h1 class="h4 fw-bold mt-3">¡Hola! Soy Paula Ramírez</h1>
+            <p class="lead mb-3">Técnico Superior en Administración de Sistemas Informáticos en Red</p>
+            <a href="#projects" class="btn btn-light btn-sm">Explora mis proyectos</a>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Mí -->
+    <section id="about" class="py-4">
+        <div class="container text-center">
+            <h2 class="h5 text-custom mb-4">Sobre Mí</h2>
+            <p>Soy un apasionado de la informática y el deporte, con formación en ambos campos. Cuento con un Grado Medio y Superior en el ámbito deportivo, y actualmente estoy cursando un Grado Superior en Informática. Me encanta desarrollar soluciones tecnológicas innovadoras, y tengo experiencia en programación, gestión de proyectos y diseño de redes.</p>
+        </div>
+    </section>
+
+    <!-- Sección de Proyectos -->
+    <section id="projects" class="py-4">
+        <div class="container text-center">
+            <h2 class="h5 text-custom mb-4">Mis Proyectos</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-container"> <!-- Tres proyectos por fila -->
+                <div class="col project-card" data-name="Proyecto Arduino I3" data-description="Este proyecto se desarrolló con el fin de ayudar a personas con capacidades especiales. A través de un dispositivo Arduino, se implementaron soluciones que facilitan tareas cotidianas. Se realizaron múltiples pruebas y ajustes para garantizar la efectividad del producto, involucrando a los usuarios en el proceso de diseño. Además, se implementaron características de accesibilidad para maximizar su utilidad.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-microchip fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Proyecto Arduino I3</h5>
+                            <p class="card-text">Desarrollo de un dispositivo para mejorar la calidad de vida.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Proyecto Arduino I3" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col project-card" data-name="Cloud Infrastructure Management" data-description="En este proyecto, se creó una infraestructura en la nube para una empresa. Se diseñaron y configuraron servidores virtuales, así como bases de datos optimizadas para el rendimiento. Además, se implementaron medidas de seguridad para proteger la información sensible. Este enfoque no solo mejoró la eficiencia operativa, sino que también redujo costos a largo plazo. Se brindó soporte continuo para garantizar el funcionamiento óptimo de la infraestructura.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-cloud fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Cloud Infrastructure Management</h5>
+                            <p class="card-text">Implementación de una infraestructura en la nube.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Cloud Infrastructure Management" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col project-card" data-name="Seguridad en Redes Corporativas" data-description="Este proyecto se centró en la seguridad de redes en una organización grande. Se llevaron a cabo auditorías para identificar vulnerabilidades y se implementaron políticas de seguridad robustas. Esto incluyó la capacitación del personal en prácticas seguras y la instalación de herramientas de monitoreo. Como resultado, la empresa experimentó una reducción significativa en incidentes de seguridad y un aumento en la confianza del cliente.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Seguridad en Redes Corporativas</h5>
+                            <p class="card-text">Fortalecimiento de la seguridad en la infraestructura de redes.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Seguridad en Redes Corporativas" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col project-card" data-name="Desarrollo de Aplicaciones Móviles" data-description="En este proyecto, diseñé y desarrollé una aplicación móvil que optimiza la gestión de tareas. La aplicación permite a los usuarios crear, editar y eliminar tareas de manera intuitiva. Se realizó un enfoque en la experiencia del usuario, implementando una interfaz atractiva y fácil de usar. Además, se integraron notificaciones para recordar a los usuarios sus tareas pendientes, mejorando así la productividad.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-mobile-alt fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Desarrollo de Aplicaciones Móviles</h5>
+                            <p class="card-text">Creación de aplicaciones para dispositivos móviles.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Desarrollo de Aplicaciones Móviles" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col project-card" data-name="Configuración de Redes Locales" data-description="El objetivo de este proyecto fue diseñar y configurar una red local para una pequeña oficina. Se analizaron las necesidades específicas de la empresa y se implementaron soluciones que garantizan un rendimiento óptimo. Además, se brindó capacitación al personal sobre el uso adecuado de la red y las herramientas disponibles, facilitando la comunicación interna y mejorando la eficiencia del trabajo en equipo.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-network-wired fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Configuración de Redes Locales</h5>
+                            <p class="card-text">Diseño y configuración de una red local para una pequeña oficina.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Configuración de Redes Locales" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col project-card" data-name="Implementación de Sistemas de Gestión" data-description="Este proyecto consistió en la integración de un sistema de gestión empresarial para optimizar los procesos internos de una compañía. Se realizó un análisis detallado de las necesidades y se seleccionó un software adecuado. Durante la implementación, se llevaron a cabo capacitaciones para asegurar que el personal estuviera familiarizado con el nuevo sistema. Esto resultó en una mayor eficiencia y una mejor organización en la gestión de proyectos.">
+                    <div class="card border-0 shadow h-100 mx-2">
+                        <div class="card-body">
+                            <i class="fas fa-cogs fa-2x text-custom"></i>
+                            <h5 class="card-title mt-2">Implementación de Sistemas de Gestión</h5>
+                            <p class="card-text">Integración de un sistema de gestión empresarial en una compañía.</p>
+                            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#projectModal" data-title="Implementación de Sistemas de Gestión" onclick="setModalContent(this)">Leer Más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para detalles del proyecto -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModalLabel">Título del Proyecto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="projectDescription">Descripción del proyecto.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Sección de Cursos -->
+    <section id="courses" class="py-4">
+        <div class="container text-center">
+            <h2 class="h5 text-custom mb-4">Certificaciones Obtenidas</h2>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-check-circle text-custom"></i> Office 365</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-custom"></i> Linux</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-custom"></i> Desarrollo Web</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-custom"></i> Gestión de Proyectos</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-custom"></i> Hacking Ético</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact" class="py-4" style="background-color: #5b4e7e;">
+        <div class="container text-center">
+            <h2 class="h5 text-white mb-4">Contacto</h2>
+            <p class="text-white mb-4">¡Me encantaría saber de ti! Puedes encontrarme en mis redes sociales o enviar un correo electrónico.</p>
+            <div class="d-flex justify-content-center mb-4">
+                <a href="https://www.linkedin.com/in/paula-ram%C3%ADrez-haro-33971720a/?trk=people-guest_people_search-card&originalSubdomain=es" class="text-white me-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://github.com/Paularh68/" class="text-white me-3"><i class="fab fa-github fa-2x"></i></a>
+                <a href="mailto:ramirezharop@gmail.com" class="text-white"><i class="fas fa-envelope fa-2x"></i></a>
+            </div>
+            <h5 class="text-white mb-3">O envíame un mensaje:</h5>
+            <form class="mb-4" action="mailto:ramirezharop@gmail.com" method="post" enctype="text/plain">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" name="mensaje" rows="3" placeholder="Tu mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-light">Enviar</button>
+            </form>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <p class="mb-0">&copy; 2024 Paula Ramírez. Todos los derechos reservados.</p>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Enlace a archivo JavaScript externo -->
+    <script src="./jspágina/páginajs.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
